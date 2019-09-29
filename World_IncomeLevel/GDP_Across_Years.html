@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+     
+    <meta charset="utf-8">
+
+      <title>Economical classification of countries</title>
+
+
+    <!-- Leaflet CSS, Bootstap & JS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="../static/css/style1.css" /> -->
+
+
+    <style>
+        h1 {
+            /* Put a 15-pixel margin at the bottom of the heading. */
+            margin-bottom: 15px;
+            /* Change the size of your font to 60 pixels high. */
+            font-size: 60px;
+            /* This will color the heading font white. */
+            color: white;
+            /* Align the text to the center of its enclosing element (e.g. div). */
+            text-align: center;
+            /* Underline the text. */
+            text-decoration: underline;
+            /* The background of the heading element will now be black. */
+            background-color: grey;
+        }
+
+        h2 {
+            /* Put a 15-pixel margin at the bottom of the heading. */
+            margin-bottom: 12px;
+            /* Change the size of your font to 60 pixels high. */
+            font-size: 40px;
+            /* This will color the heading font white. */
+            color: white;
+            /* Align the text to the center of its enclosing element (e.g. div). */
+            text-align: center;
+            /* Underline the text. */
+            text-decoration: underline;
+            /* The background of the heading element will now be black. */
+            background-color: grey;
+        }
+
+        h3 {
+            /* Put a 15-pixel margin at the bottom of the heading. */
+            margin-bottom: 10px;
+            /* Change the size of your font to 60 pixels high. */
+            font-size: 35px;
+            /* This will color the heading font white. */
+            color: white;
+            /* Align the text to the center of its enclosing element (e.g. div). */
+            text-align: center;
+            /* Underline the text. */
+            text-decoration: underline;
+            /* The background of the heading element will now be black. */
+            background-color: grey;
+        }
+
+        body {
+            background-image: url("image3.jpeg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            height: 100%;
+        }
+
+
+        /* All p tags */
+        p {
+            text-align: center;
+            font-size: 16px;
+            /* Bold the text. */
+            font-weight: bold;
+
+        }
+
+        img {
+            /* 
+      Center a block element in the middle of its enclosing tag.
+      When you use the "auto" rule on both left and right margins, 
+      your browser will do the math necessary to center a block element.
+      */
+            margin-left: auto;
+            margin-right: auto;
+            /* Block display (more on this later) */
+            display: block;
+
+        }
+
+        .map {
+            height: 50%;
+            width: 100%;
+        }
+
+        .chart {
+            width: 90%;
+            height: 40%;
+        }
+
+        .line {
+            width: 300%;
+            height: 40%;
+        }
+    </style>
+
+           
+
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+
+
+</head>
+
+
+<body>
+    <h1>Economical classification of countries</h1>
+
+
+    <!-- <image></image>
+
+    <div id="plot"></div> -->
+
+
+
+
+    <div class="container">
+        <div class="row mb-12 mt-5">
+            <div class="col-md-12 mb-5">
+                <h2>World Bank Report</h2>
+                <p>World Bank categorizes countries based on various characteristics, such as geography, lending
+                    eligibility,
+                    fragility, and average level of income, to help shed light how different groups of countries are
+                    doing.
+                    When it
+                    comes to income , the World Bank divides the world's economies into four income groups: high,
+                    upper-middle,
+                    lower-middle, and low.
+                    The income classification is based on a measure of national income per person, or GNI per capita,
+                    calculated using
+                    the Atlas method.The classification is updated each year on July 1st.
+                </p>
+                <hr>
+                <h3>Classifications of countries - by income </h3>
+                <h4><strong>The classification of countries is determined by two factors:</strong></h4>
+                <p>A country’s GNI per capita, which can change with economic growth, inflation, exchange rates, and
+                    population. Revisions to national accounts methods and data can also influence GNI per capita.
+                    Classification threshold: The thresholds are adjusted for inflation annually using the SDR deflator.
+                </p>
+                <button type="button" class="btn btn-info btn-circle btn-xl High">
+                        <a href="http://worldpopulationreview.com/countries/high-income-countries" style="color:inherit"> High Income countries </a>
+                </button>
+
+                <button type="button" class="btn btn-info btn-circle btn-xl upper-middle">
+                        <a href="http://worldpopulationreview.com/countries/middle-income-countries" style="color:inherit">upper-middle
+                    countries</a></button>
+                <button type="button" class="btn btn-info btn-circle btn-xl lower-middle"> 
+                       
+                        <a href=" https://data.worldbank.org/income-level/lower-middle-income" style="color:inherit">lower-middle
+                    countries</button>
+                <button type="button" class="btn btn-danger btn-circle btn-xl low income"> 
+                        <a href="http://worldpopulationreview.com/countries/low-income-countries" style="color:inherit"> low income
+                    countries</a></button><br>
+                <div id="bar-plot"></div>
+                <iframe width="1090" height="490" src="Bar_index.html" frameborder="0" style="border: none"></iframe>
+
+                <!-- <div id="map"></div>
+                    <div class="chart1"> <img src="https://plot.ly/~jackp/10368.png" alt="Chart1" class="chart"></div>
+            <br><br><iframe width="1540" height="790" src="index.html" frameborder="0" style="border: none"></iframe> -->
+
+
+                <hr>
+                <h3>Classifications of countries - by GDP </h3>
+                <h4><strong></strong></h4>
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Select country</label>
+                            <select id="myList1" onchange="dropdown_manager1(this.value)"></select>
+                            <div id="Line" style="width: 1090px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                        <!-- 
+                    /* <div class="chart1"> <img src="https://plot.ly/~jackp/10368.png" alt="Chart1" class="chart"></div> */
+                    <iframe width="1540" height="790"src="https://plot.ly/~jackp/10368.png" frameborder="0"></iframe> -->
+
+                    </div>
+                    <!-- <br><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+
+                </div>
+                <br>
+                
+                              <div id="bar" style="width: 1090px; height: 400px; margin: 0 auto"></div> 
+            
+                <h3>Classifications of countries - by population </h3>
+
+                 
+            <iframe width="1090" height="590" src="Pie_Chart.html" frameborder="0" style="border: none"></iframe>
+            <!-- 
+                    /* <div class="chart1"> <img src="https://plot.ly/~jackp/10368.png" alt="Chart1" class="chart"></div> */
+                    <iframe width="1540" height="790"src="https://plot.ly/~jackp/10368.png" frameborder="0"></iframe> -->
+
+        </div>
+        <!-- <br><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+
+    <!-- </div>
+    </div>
+
+    </div>
+    </div> -->
+   
+
+<!-- 
+    <div class="container">
+        <div class="jumbotron">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="image1.jpg" alt="" class="img-responsive">
+
+                    </div>
+                </div>
+            </div>
+            <img src="image1.jpg" class="img-rounded" alt="Cinque Terre">
+            <h1 class="display-4">Jumbotron!</h1>
+            <p class="lead">This is placed inside a container</p>
+            <hr class="my-4"> --> -->
+
+
+
+            <!--   <div class="container">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Select country</label>
+                        <select id="myList1" onchange="dropdown_manager1(this.value)"></select>
+                        <div id="Line"></div>
+
+                      <div class="chart1"> <img src="https://plot.ly/~jackp/10368.png" alt="Chart1" class="chart"></div>
+        <iframe width="1540" height="790"src="https://plot.ly/~jackp/10368.png" frameborder="0"></iframe> -->
+
+     
+        <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
+
+   
+
+
+
+
+
+    <!-- <div class="col-md-6">
+
+                <label>Select year</label>
+                <select id="myList2" onchange="dropdown_manager2(this.value)"></select>
+            </div> -->
+          
+        
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- API key -->
+
+    <!-- <script type="text/javascript" src="config.js"></script> -->
+    <!-- Our JS -->
+
+    <script type="text/javascript" src="logic_combined.js"></script>
+
+    <script type="text/javascript" src="config.js"></script>
+    <!-- Our JS -->
+    <!-- <script type="text/javascript" src="logic.js"></script> -->
+
+</body>
+
+</html>
